@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.util.AESUtilFinal;
 import com.util.SystemConfig;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,24 @@ public class UserAction extends ActionSupport{
     }
 
     public String addUser(){
+
+        /**
+         * 年龄判断
+         */
         SystemConfig systemConfig = SystemConfig.getInstance();
         systemConfig.init();
         int minage = SystemConfig.getInteger("minage");
         int maxage = SystemConfig.getInteger("maxage");
+
+        /**
+         * 密码的明文加密
+         */
+        String secretKey = SystemConfig.get("secretKey");
+        String password = user.getPassword();
+        System.out.println(password);
+        String encrypt = AESUtilFinal.encrypt(secretKey, password);
+        System.out.println(encrypt);
+        user.setPassword(encrypt);
 
         if(userService.exits(String.valueOf(user.getAge()))&&minage>15&&maxage<35){
             return ERROR;
