@@ -10,31 +10,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 
-<title>mywork</title>
+<title>User Register</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="SSH">
+    <link href="static/bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="static/js/jquery-3.3.1.min.js"></script>
 
 </head>
 
 <body>
-	添加user，如果姓名没有冲突，那么就添加到数据库，如果姓名冲突了就不能添加，返回失败页面
-	<form action="add.action" method="get">
+	<%--添加user，如果姓名没有冲突，那么就添加到数据库，如果姓名冲突了就不能添加，返回失败页面--%>
+	<div class="text-center">
+		<form action="add.action" method="get">
 		UserName:<input type="text" name="user.name"><br />
 		UserPassword:<input type="password" name="user.password"><br />
 		Phone:<input type="text" name="user.phone"><br />
 		Age:<input type="text" name="user.age"><br />
 		Address:<input type="text" name="user.address"><br />
-		<input type="submit" value="提交"> <input type="reset" value="重置">
+		<input type="submit" value="Register"> <input type="reset" value="Reset">
 	</form>
-	根据姓名查询，若不输入，则查询全部
-	<form action="query.action" method="post">
-		UserName： <input type="text" name="queryText" value="${searchText }" />
-		<input type="submit" value="查询" />
-	</form>
-
+	</div>
+	<div class="text-black-50">
+		根据姓名查询，若不输入，则查询全部
+		<form action="query.action" method="post">
+			UserName： <input type="text" name="queryText" value="${searchText }" />
+			<input type="submit" value="查询" />
+		</form>
+	</div>
 	<table width="70%" border="1px" align="center" cellpadding="0"
 		cellspacing="0">
 		<thead>
@@ -61,6 +66,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</c:forEach>
 		</tbody>
 	</table>
-
 </body>
 </html>

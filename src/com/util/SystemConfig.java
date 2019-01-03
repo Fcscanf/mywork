@@ -42,9 +42,8 @@ public class SystemConfig {
     
     /**
      * Initialized
-     *
-     * @param f sysconfig.properties
-     * @param reload
+     * f sysconfig.properties
+     * reload
      */
     public boolean init() {
         if (this.initialized) {
