@@ -29,19 +29,6 @@ out/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-.classpath
-.mymetadata
-.project
 .settings/
-WebRoot/META-INF/
-WebRoot/WEB-INF/classes/META-INF/
-WebRoot/WEB-INF/classes/applicationContext.xml
-WebRoot/WEB-INF/classes/com/model/User.hbm.xml
-WebRoot/WEB-INF/classes/struts.xml
-WebRoot/WEB-INF/lib/web.xml
-WebRoot/WEB-INF/web.xml
-WebRoot/fail.jsp
-WebRoot/index.jsp
-WebRoot/success.jsp
 mywork.iml
-src/
+

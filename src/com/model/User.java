@@ -20,6 +20,8 @@ public class User implements Serializable{
 	private String password;
 
 	private String phone;
+	private int age;
+	private String address;
 
 	public int getId() {
 		return id;
@@ -46,5 +48,21 @@ public class User implements Serializable{
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

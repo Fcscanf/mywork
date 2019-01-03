@@ -18,6 +18,12 @@
         <property name="phone" type="java.lang.String">
             <column name="phone" length="15" not-null="true" />
         </property>
+        <property name="age" type="java.lang.Integer">
+            <column name="age" length="3" not-null="true" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="50" not-null="true" />
+        </property>
        
     </class>
 </hibernate-mapping>

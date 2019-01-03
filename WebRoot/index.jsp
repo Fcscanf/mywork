@@ -25,6 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		UserName:<input type="text" name="user.name"><br />
 		UserPassword:<input type="password" name="user.password"><br />
 		Phone:<input type="text" name="user.phone"><br />
+		Age:<input type="text" name="user.age"><br />
+		Address:<input type="text" name="user.address"><br />
 		<input type="submit" value="提交"> <input type="reset" value="重置">
 	</form>
 	根据姓名查询，若不输入，则查询全部
@@ -37,10 +39,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		cellspacing="0">
 		<thead>
 			<tr bgcolor="#ff0">
-				<th width="30%">编号</th>
-				<th width="30%">姓名</th>
-				<th width="30%">手机号</th>
-				<th width="40%">操作</th>
+				<th width="10%">编号</th>
+				<th width="15%">姓名</th>
+				<th width="20%">手机号</th>
+				<th width="20%">年龄</th>
+				<th width="20%">地址</th>
+				<th width="15%">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,6 +53,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${user.id}</td>
 					<td>${user.name}</td>
 					<td>${user.phone}</td>
+					<td>${user.age}</td>
+					<td>${user.address}</td>
 					<td><a href="edit.action?param=0&id=${user.id}">编辑</a> <a
 						href="delete.action?id=${user.id}">删除</a></td>
 				</tr>
