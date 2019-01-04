@@ -44,5 +44,6 @@
         </tr>
     </table>
 </form>
+<div style="red;">${msg}</div>
 </body>
 </html>

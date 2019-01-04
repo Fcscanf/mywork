@@ -3,7 +3,10 @@ package com.action;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.sun.deploy.net.HttpResponse;
 import com.util.AESUtilFinal;
 import com.util.SystemConfig;
 import org.apache.struts2.ServletActionContext;
@@ -31,6 +34,8 @@ public class UserAction extends ActionSupport{
     private String searchText;
 
     private List<User> users;
+
+    private HttpServletRequest request;
 
     public User getUser() {
         return user;
@@ -105,15 +110,19 @@ public class UserAction extends ActionSupport{
     public String loginUser() {
         String userName = user.getName();
         String password = user.getPassword();
-        String secretKey = SystemConfig.get("secretKey");
         System.out.println(password);
+
+        SystemConfig systemConfig = SystemConfig.getInstance();
+        systemConfig.init();
+        String secretKey = SystemConfig.get("secretKey");
         String encrypt = AESUtilFinal.encrypt(secretKey, password);
         System.out.println(encrypt);
+
         if (userService.haveUser(userName, encrypt)){
             return SUCCESS;
         }
+        request = ServletActionContext.getRequest();
+        request.setAttribute("msg","用户名或密码错误！");
         return ERROR;
-
-
     }
 }
