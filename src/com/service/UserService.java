@@ -28,4 +28,7 @@ public interface UserService {
 	 * 获取用户列表
 	 */
 	public List<User> queryUsers(String username);
+
+	public boolean haveUser(String username, String password);
+
 }

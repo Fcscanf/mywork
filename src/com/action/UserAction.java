@@ -102,4 +102,18 @@ public class UserAction extends ActionSupport{
         this.users = users;
     }
 
+    public String loginUser() {
+        String userName = user.getName();
+        String password = user.getPassword();
+        String secretKey = SystemConfig.get("secretKey");
+        System.out.println(password);
+        String encrypt = AESUtilFinal.encrypt(secretKey, password);
+        System.out.println(encrypt);
+        if (userService.haveUser(userName, encrypt)){
+            return SUCCESS;
+        }
+        return ERROR;
+
+
+    }
 }

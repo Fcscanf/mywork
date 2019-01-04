@@ -65,4 +65,28 @@ public class User implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+    public User() {
+    }
+
+    public User(int id, String name, String password, String phone, int age, String address) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.age = age;
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }
