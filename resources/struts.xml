@@ -7,7 +7,7 @@
 	<!-- 配置action当与spring整合,class=bean的名称（如果bean没有指定value，则首写字母要小写））  -->
 		<action name="add" class="userAction" method="addUser" >
 			<result name="success">success.jsp</result>
-			<result name="error">fail.jsp</result>
+			<result name="error">regist.jsp</result>
 		</action>
 		<action name="query" class="userAction" method="queryUser">
 			<result name="success">regist.jsp</result>

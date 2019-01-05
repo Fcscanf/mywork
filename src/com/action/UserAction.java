@@ -65,6 +65,7 @@ public class UserAction extends ActionSupport {
     public String addUser() {
 
         request = ServletActionContext.getRequest();
+        String password = user.getPassword();
 
         /**
          * 年龄判断
@@ -73,21 +74,29 @@ public class UserAction extends ActionSupport {
         systemConfig.init();
         int minage = SystemConfig.getInteger("minage");
         int maxage = SystemConfig.getInteger("maxage");
+        int minpasslength = SystemConfig.getInteger("minpasslength");
+        int maxpasslength = SystemConfig.getInteger("maxpasslength");
+
+        if (userService.exits(user.getName())){
+            request.setAttribute("msg", "该用户名已存在！");
+            return ERROR;
+        } else if (!(password.length() > minpasslength && password.length() < maxpasslength)) {
+            request.setAttribute("msg", "用户密码长度不符合要求！");
+            return ERROR;
+        } else if (!(user.getAge() > minage && user.getAge() < maxage)) {
+            request.setAttribute("msg", "用户年龄大小不符合要求！");
+            return ERROR;
+        }
 
         /**
          * TODO: 密码长度校验、年龄大小校验
          * 密码的明文加密
          */
         String secretKey = SystemConfig.get("secretKey");
-        String password = user.getPassword();
-        System.out.println(password);
         String encrypt = AESUtilFinal.encrypt(secretKey, password);
         System.out.println(encrypt);
         user.setPassword(encrypt);
 
-        if (userService.exits(String.valueOf(user.getAge())) && minage > 15 && maxage < 35) {
-            return ERROR;
-        }
         userService.save(user);
         log = new Log();
         log.setUserName(user.getName());
