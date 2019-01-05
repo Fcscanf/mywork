@@ -31,4 +31,6 @@ public interface UserService {
 
 	public boolean haveUser(String username, String password);
 
+    public boolean isBlackUser(String username);
+
 }

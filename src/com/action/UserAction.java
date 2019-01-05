@@ -108,21 +108,36 @@ public class UserAction extends ActionSupport{
     }
 
     public String loginUser() {
+
+        request = ServletActionContext.getRequest();
+
         String userName = user.getName();
         String password = user.getPassword();
         System.out.println(password);
 
-        SystemConfig systemConfig = SystemConfig.getInstance();
-        systemConfig.init();
-        String secretKey = SystemConfig.get("secretKey");
-        String encrypt = AESUtilFinal.encrypt(secretKey, password);
-        System.out.println(encrypt);
+        /**
+         * 先判断是否是黑名单用户
+         */
+        if (userService.isBlackUser(userName)) {
+            request.setAttribute("msg","该用户是黑名单用户，不能登录！");
+            return ERROR;
+        }else {
+            /**
+             * 再进行用户密码校验
+             */
+            SystemConfig systemConfig = SystemConfig.getInstance();
+            systemConfig.init();
+            String secretKey = SystemConfig.get("secretKey");
+            String encrypt = AESUtilFinal.encrypt(secretKey, password);
+            System.out.println(encrypt);
 
-        if (userService.haveUser(userName, encrypt)){
-            return SUCCESS;
+            if (userService.haveUser(userName, encrypt)){
+
+                return SUCCESS;
+            }else {
+                request.setAttribute("msg","用户名或密码错误！");
+                return ERROR;
+            }
         }
-        request = ServletActionContext.getRequest();
-        request.setAttribute("msg","用户名或密码错误！");
-        return ERROR;
     }
 }

@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.model.Blackuser;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
 import com.model.User;
 
 @Component
-public class UserDAO {
+public class UserDao {
 	private HibernateTemplate hibernateTemplate;
 
 	public HibernateTemplate getHibernateTemplate() {
@@ -43,6 +44,18 @@ public class UserDAO {
 	
 	public List<User> findAllUsers(){
 		 return this.getHibernateTemplate().find("from User order by id");  
+	}
+
+	/**
+	 * 查询黑名单用户
+	 *
+	 * @param
+	 * @return
+	 * @author Fcscanf
+	 * @date 上午 8:29 2019-01-05/0005
+	 */
+	public List<Blackuser> checkBlackUser() {
+		return (List<Blackuser>) hibernateTemplate.find("from Blackuser order by id");
 	}
 
 }

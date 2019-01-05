@@ -16,8 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="SSH">
-    <link href="<%=basePath%>static/bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="<%=basePath%>static/js/jquery-3.3.1.min.js"></script>
+    <link href="<%=basePath%>bootjs/bootstrap-4.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="<%=basePath%>bootjs/js/jquery-3.3.1.min.js"></script>
 
 </head>
 

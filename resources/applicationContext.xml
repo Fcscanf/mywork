@@ -32,6 +32,7 @@
 		<property name="mappingResources">
 			<list>
 				<value>com/model/User.hbm.xml</value>
+				<value>com/model/Blackuser.hbm.xml</value>
 			</list>
 		</property>
 		
