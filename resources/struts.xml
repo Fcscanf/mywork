@@ -10,7 +10,7 @@
 			<result name="error">fail.jsp</result>
 		</action>
 		<action name="query" class="userAction" method="queryUser">
-			<result name="success">register.jsp</result>
+			<result name="success">regist.jsp</result>
 		</action>
         <action name="login" class="userAction" method="loginUser">
             <result name="error">login.jsp</result>

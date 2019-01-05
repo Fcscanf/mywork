@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50523
 File Encoding         : 65001
 
-Date: 2019-01-05 10:05:42
+Date: 2019-01-05 20:05:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,6 +67,29 @@ CREATE TABLE `detail` (
 -- Records of detail
 -- ----------------------------
 INSERT INTO `detail` VALUES ('1', 'DFD', 'fcscanf@126.com');
+
+-- ----------------------------
+-- Table structure for `log`
+-- ----------------------------
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE `log` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(20) DEFAULT NULL,
+  `login_time` varchar(20) DEFAULT NULL,
+  `log_ip` varchar(20) DEFAULT NULL,
+  `logout_time` varchar(20) DEFAULT NULL,
+  `log` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of log
+-- ----------------------------
+INSERT INTO `log` VALUES ('1', 'Fcscanf', '2019-01-05 19:43:47', '127.0.0.1', null, '用户登录');
+INSERT INTO `log` VALUES ('2', '古赛昆', '2019-01-05 19:53:00', '127.0.0.1', null, '用户登录');
+INSERT INTO `log` VALUES ('3', '古赛昆', '2019-01-05 19:53:45', '127.0.0.1', null, '用户登录');
+INSERT INTO `log` VALUES ('4', 'Fcscanf', '2019-01-05 20:03:31', '127.0.0.1', null, '用户登录');
+INSERT INTO `log` VALUES ('5', 'Fcant', '2019-01-05 20:03:51', '127.0.0.1', null, '用户注册');
 
 -- ----------------------------
 -- Table structure for `login`
@@ -205,7 +228,7 @@ CREATE TABLE `user` (
   `age` int(3) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -214,6 +237,8 @@ INSERT INTO `user` VALUES ('9', 'Fcscanf4', 'uQlUxAlQVyA8drsLy+AdLQ==', '1782626
 INSERT INTO `user` VALUES ('10', 'Fcscanf', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '盐城工学院');
 INSERT INTO `user` VALUES ('11', 'Fcscanf11', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '南京市玄武区');
 INSERT INTO `user` VALUES ('12', '古赛昆', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '北京市朝阳区');
+INSERT INTO `user` VALUES ('13', 'Fcant', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '北京市朝阳区');
+INSERT INTO `user` VALUES ('14', 'Fcant', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '盐城工学院');
 
 -- ----------------------------
 -- Table structure for `usertable`

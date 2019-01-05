@@ -33,6 +33,7 @@
 			<list>
 				<value>com/model/User.hbm.xml</value>
 				<value>com/model/Blackuser.hbm.xml</value>
+				<value>com/model/Log.hbm.xml</value>
 			</list>
 		</property>
 		
