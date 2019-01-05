@@ -81,10 +81,10 @@ public class UserAction extends ActionSupport {
             request.setAttribute("msg", "该用户名已存在！");
             return ERROR;
         } else if (!(password.length() > minpasslength && password.length() < maxpasslength)) {
-            request.setAttribute("msg", "用户密码长度不符合要求！");
+            request.setAttribute("passmsg", "用户密码长度不符合要求！");
             return ERROR;
         } else if (!(user.getAge() > minage && user.getAge() < maxage)) {
-            request.setAttribute("msg", "用户年龄大小不符合要求！");
+            request.setAttribute("agemsg", "用户年龄大小不符合要求！");
             return ERROR;
         }
 

@@ -24,18 +24,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<%--添加user，如果姓名没有冲突，那么就添加到数据库，如果姓名冲突了就不能添加，返回失败页面--%>
 	<div class="text-center">
-		<form action="add.action" method="get">
-		UserName:<input type="text" name="user.name" value="Fc"><br />
-		UserPassword:<input type="password" name="user.password"><br />
+		<form action="add.action" method="post">
+		UserName:<input type="text" name="user.name" value="Fc">${msg}<br />
+		UserPassword:<input type="password" name="user.password">${passmsg}<br />
 		Phone:<input type="text" name="user.phone" value="17826260016"><br />
-		Age:<input type="text" name="user.age" value="请输入年龄10-35岁！"><br />
+		Age:<input type="text" name="user.age" value="请输入年龄10-35岁！">${agemsg}<br />
 		Address:<input type="text" name="user.address" value="北京市海淀区"><br />
 		<input type="submit" value="Register"> <input type="reset" value="Reset">
 	</form>
 	</div>
-    <div>
-        ${msg}
-    </div>
 	<div class="text-black-50">
 		根据姓名查询，若不输入，则查询全部
 		<form action="query.action" method="post">
