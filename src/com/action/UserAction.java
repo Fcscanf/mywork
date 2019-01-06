@@ -83,6 +83,9 @@ public class UserAction extends ActionSupport {
         } else if (!(password.length() > minpasslength && password.length() < maxpasslength)) {
             request.setAttribute("passmsg", "用户密码长度不符合要求！");
             return ERROR;
+        } else if (isPhone(user.getPhone())) {
+            request.setAttribute("phonemsg", "手机号格式不正确！");
+            return ERROR;
         } else if (!(user.getAge() > minage && user.getAge() < maxage)) {
             request.setAttribute("agemsg", "用户年龄大小不符合要求！");
             return ERROR;
@@ -202,5 +205,25 @@ public class UserAction extends ActionSupport {
             ip = "本地";
         }
         return ip;
+    }
+
+    /**
+     * 判断手机号格式正确性
+     *
+     * @param phone
+     * @return
+     * @author Fcscanf
+     * @date 上午 10:08 2019-01-06/0006
+     */
+    public boolean isPhone(String phone) {
+        SystemConfig systemConfig = SystemConfig.getInstance();
+        systemConfig.init();
+        String phoneLength = SystemConfig.get("phonelength");
+        String phoneFirst = phone.substring(0, 1);
+        String telLength = String.valueOf(phone.length());
+        if (telLength.equals(phoneLength) && phoneFirst.equals(1)) {
+            return false;
+        }
+        return true;
     }
 }

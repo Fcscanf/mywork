@@ -29,7 +29,8 @@
         <span style="--red: 3">${msg}</span><br />
         密码:<input type="password" name="user.password">
         <span style="--red: 3">${passmsg}</span><br />
-        手机:<input type="text" name="user.phone" value="17826260016"><br />
+        手机:<input type="text" name="user.phone" value="17826260016">
+        <span style="--red: 3">${phonemsg}</span><br />
         年龄:<input type="text" name="user.age" value="请输入年龄10-35岁！">
         <span style="--red: 3">${agemsg}</span><br />
         地址:<input type="text" name="user.address" value="北京市海淀区"><br />
