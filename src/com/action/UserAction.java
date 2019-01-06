@@ -89,7 +89,6 @@ public class UserAction extends ActionSupport {
         }
 
         /**
-         * TODO: 密码长度校验、年龄大小校验
          * 密码的明文加密
          */
         String secretKey = SystemConfig.get("secretKey");
