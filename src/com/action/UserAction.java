@@ -74,20 +74,18 @@ public class UserAction extends ActionSupport {
         systemConfig.init();
         int minage = SystemConfig.getInteger("minage");
         int maxage = SystemConfig.getInteger("maxage");
-        int minpasslength = SystemConfig.getInteger("minpasslength");
-        int maxpasslength = SystemConfig.getInteger("maxpasslength");
 
-        if (userService.exits(user.getName())){
-            request.setAttribute("msg", "该用户名已存在！");
+        if (userService.exits(user.getName())) {
+            request.setAttribute("nameMsg", "该用户名已存在！");
             return ERROR;
-        } else if (!(password.length() > minpasslength && password.length() < maxpasslength)) {
-            request.setAttribute("passmsg", "用户密码长度不符合要求！");
+        } else if (!isEngDig(user.getPassword())) {
+            request.setAttribute("passMsg", "密码不是英文和数字的组合！");
             return ERROR;
         } else if (isPhone(user.getPhone())) {
-            request.setAttribute("phonemsg", "手机号格式不正确！");
+            request.setAttribute("phoneMsg", "手机号格式不正确！");
             return ERROR;
         } else if (!(user.getAge() > minage && user.getAge() < maxage)) {
-            request.setAttribute("agemsg", "用户年龄大小不符合要求！");
+            request.setAttribute("ageMsg", "用户年龄大小不符合要求！");
             return ERROR;
         }
 
@@ -211,7 +209,7 @@ public class UserAction extends ActionSupport {
      * 判断手机号格式正确性
      *
      * @param phone
-     * @return
+     * @return true
      * @author Fcscanf
      * @date 上午 10:08 2019-01-06/0006
      */
@@ -221,9 +219,22 @@ public class UserAction extends ActionSupport {
         String phoneLength = SystemConfig.get("phonelength");
         String phoneFirst = phone.substring(0, 1);
         String telLength = String.valueOf(phone.length());
-        if (telLength.equals(phoneLength) && phoneFirst.equals(1)) {
+        if (telLength.equals(phoneLength) && phoneFirst.equals(String.valueOf(1))) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 判断密码是否为数字和英文的组合
+     *
+     * @param password
+     * @return
+     * @author Fcscanf
+     * @date 上午 10:35 2019-01-06/0006
+     */
+    public static boolean isEngDig(String password) {
+        String regex = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
+        return password.matches(regex);
     }
 }
