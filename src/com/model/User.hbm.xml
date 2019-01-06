@@ -24,6 +24,9 @@
         <property name="address" type="java.lang.String">
             <column name="address" length="50" not-null="true" />
         </property>
+        <property name="registDate" type="java.lang.String">
+            <column name="regist_date" length="20" not-null="true" />
+        </property>
        
     </class>
 </hibernate-mapping>

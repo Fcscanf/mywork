@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50523
 File Encoding         : 65001
 
-Date: 2019-01-05 20:05:55
+Date: 2019-01-06 19:55:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -80,16 +80,18 @@ CREATE TABLE `log` (
   `logout_time` varchar(20) DEFAULT NULL,
   `log` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of log
 -- ----------------------------
 INSERT INTO `log` VALUES ('1', 'Fcscanf', '2019-01-05 19:43:47', '127.0.0.1', null, '用户登录');
-INSERT INTO `log` VALUES ('2', '古赛昆', '2019-01-05 19:53:00', '127.0.0.1', null, '用户登录');
-INSERT INTO `log` VALUES ('3', '古赛昆', '2019-01-05 19:53:45', '127.0.0.1', null, '用户登录');
-INSERT INTO `log` VALUES ('4', 'Fcscanf', '2019-01-05 20:03:31', '127.0.0.1', null, '用户登录');
-INSERT INTO `log` VALUES ('5', 'Fcant', '2019-01-05 20:03:51', '127.0.0.1', null, '用户注册');
+INSERT INTO `log` VALUES ('7', 'Fcscanf', '2019-01-05 20:38:57', '127.0.0.1', null, '用户登录');
+INSERT INTO `log` VALUES ('8', 'Fc', '2019-01-05 20:39:53', '127.0.0.1', null, '用户注册');
+INSERT INTO `log` VALUES ('18', 'Fcscanf', '2019-01-06 09:44:07', '127.0.0.1', null, '用户登录');
+INSERT INTO `log` VALUES ('19', 'Fc1234', '2019-01-06 15:25:05', '127.0.0.1', null, '用户注册');
+INSERT INTO `log` VALUES ('20', 'Fc12345', '2019-01-06 15:45:38', '127.0.0.1', null, '用户注册');
+INSERT INTO `log` VALUES ('21', 'Fc123', '2019-01-06 19:54:54', '127.0.0.1', null, '用户注册');
 
 -- ----------------------------
 -- Table structure for `login`
@@ -227,18 +229,22 @@ CREATE TABLE `user` (
   `phone` varchar(15) DEFAULT NULL,
   `age` int(3) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
+  `regist_date` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('9', 'Fcscanf4', 'uQlUxAlQVyA8drsLy+AdLQ==', '17826260016', '12', '北京市朝阳区');
-INSERT INTO `user` VALUES ('10', 'Fcscanf', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '盐城工学院');
-INSERT INTO `user` VALUES ('11', 'Fcscanf11', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '南京市玄武区');
-INSERT INTO `user` VALUES ('12', '古赛昆', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '北京市朝阳区');
-INSERT INTO `user` VALUES ('13', 'Fcant', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '北京市朝阳区');
-INSERT INTO `user` VALUES ('14', 'Fcant', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '盐城工学院');
+INSERT INTO `user` VALUES ('10', 'Fcscanf', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '盐城工学院', null);
+INSERT INTO `user` VALUES ('11', 'Fcscanf11', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '南京市玄武区', null);
+INSERT INTO `user` VALUES ('12', '古赛昆', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '北京市朝阳区', null);
+INSERT INTO `user` VALUES ('13', 'Fcant', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '北京市朝阳区', null);
+INSERT INTO `user` VALUES ('14', 'Fcant', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '12', '盐城工学院', null);
+INSERT INTO `user` VALUES ('15', 'Fc', 'Yp6nR8xVy/yAUZ3cJSkHGw==', '17826260016', '12', '北京市海淀区', null);
+INSERT INTO `user` VALUES ('16', 'Fc1234', 'Mlr9Y9LWQHK5DXoRTbWQCA==', '17826260016', '18', '北京市海淀区', null);
+INSERT INTO `user` VALUES ('17', 'Fc12345', 'X4vjXmIWcvrjVzj9v15Eww==', '17826260016', '12', '北京市海淀区', null);
+INSERT INTO `user` VALUES ('18', 'Fc123', 'X4vjXmIWcvrjVzj9v15Eww==', '17826260016', '18', '北京市海淀区', '2019-01-06 19:54:54');
 
 -- ----------------------------
 -- Table structure for `usertable`

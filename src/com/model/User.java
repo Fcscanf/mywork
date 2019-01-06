@@ -23,6 +23,8 @@ public class User implements Serializable{
 	private int age;
 	private String address;
 
+    private String registDate;
+
 	public int getId() {
 		return id;
 	}
@@ -69,24 +71,12 @@ public class User implements Serializable{
     public User() {
     }
 
-    public User(int id, String name, String password, String phone, int age, String address) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.phone = phone;
-        this.age = age;
-        this.address = address;
+    public String getRegistDate() {
+        return registDate;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", age=" + age +
-                ", address='" + address + '\'' +
-                '}';
+    public void setRegistDate(String registDate) {
+        this.registDate = registDate;
     }
+
 }

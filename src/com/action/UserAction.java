@@ -96,6 +96,7 @@ public class UserAction extends ActionSupport {
         String encrypt = AESUtilFinal.encrypt(secretKey, password);
         System.out.println(encrypt);
         user.setPassword(encrypt);
+        user.setRegistDate(currentime);
 
         userService.save(user);
         log = new Log();
