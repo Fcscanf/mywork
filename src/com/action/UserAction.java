@@ -76,15 +76,19 @@ public class UserAction extends ActionSupport {
         int maxage = SystemConfig.getInteger("maxage");
 
         if (userService.exits(user.getName())) {
+            request.setAttribute("user",user);
             request.setAttribute("nameMsg", "该用户名已存在！");
             return ERROR;
         } else if (!isEngDig(user.getPassword())) {
-            request.setAttribute("passMsg", "密码不是英文和数字的组合！");
+            request.setAttribute("user",user);
+            request.setAttribute("passMsg", "密码不是英文和数字的组合且密码长度至少6不能多于20位！");
             return ERROR;
         } else if (isPhone(user.getPhone())) {
+            request.setAttribute("user",user);
             request.setAttribute("phoneMsg", "手机号格式不正确！");
             return ERROR;
         } else if (!(user.getAge() > minage && user.getAge() < maxage)) {
+            request.setAttribute("user",user);
             request.setAttribute("ageMsg", "用户年龄大小不符合要求！");
             return ERROR;
         }
@@ -175,6 +179,7 @@ public class UserAction extends ActionSupport {
                 logService.logWrite(log);
                 return SUCCESS;
             } else {
+                request.setAttribute("user",user);
                 request.setAttribute("msg", "用户名或密码错误！");
                 return ERROR;
             }

@@ -27,7 +27,7 @@
                     用户名
                 </td>
                 <td>
-                    <input type="text" name="user.name">
+                    <input type="text" name="user.name" value=${user.name}>
                 </td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
             </tr>
         </table>
     </form>
-    <div style="red;">${msg}</div>
+    <div style="color: red;">${msg}</div>
 </div>
 </body>
 </html>
