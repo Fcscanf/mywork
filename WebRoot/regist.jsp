@@ -22,41 +22,42 @@
 </head>
 
 <body background="img/bg_2.webp">
-<%--添加user，如果姓名没有冲突，那么就添加到数据库，如果姓名冲突了就不能添加，返回失败页面--%>
-<div class="text-center">
+<%--添加user，如果姓名没有冲突，那么就添加到数据库，如6果姓名冲突了就不能添加，返回失败页面--%>
+<div style="margin-left: 480px;">
+    <figure class="figure" style="margin-left: 150px">
+        <h1>盐淘商城网</h1>
+    </figure>
     <form action="add.action" method="post">
-        <div class="form-row">
-            <div class="col-md-4 mb-3">
+        <div class="form-group">
+            <div class="col-md-6 mb-3">
                 <label>昵称</label>
                 <input type="text" name="user.name" class="form-control is-valid"
                        value=${user.name}>
                 <div class="valid-feedback">
-                    请输入您的昵称！
+                    请输入您的昵称！<span style="color: red;">${nameMsg}</span>
                 </div>
-                <span style="color: red;">${nameMsg}</span><br/>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 mb-3">
                 <label>密码</label>
                 <input type="password" name="user.password" class="form-control is-valid"
                        maxlength="20">
                 <div class="valid-feedback">
                     请输入您的密码，密码必须中英文组合且密码长度至少6不能多于20位！
+                    <span style="color: red;">${passMsg}</span>
                 </div>
-                <span style="color: red;">${passMsg}</span><br/>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 mb-3">
                 <label>年龄</label>
                 <input type="text" name="user.age" class="form-control is-valid"
                        maxlength="2" min="10" max="35"
                        value=${user.age}>
                 <div class="valid-feedback">
-                    请输入您的年龄，限制10-35岁注册！
+                    请输入您的年龄，限制10-35岁注册！<span style="color: red;">${ageMsg}</span>
                 </div>
-                <span style="color: red;">${ageMsg}</span><br/>
             </div>
         </div>
-        <div class="form-row">
-            <div class="col-md-4 mb-2">
+        <div class="form-group">
+            <div class="col-md-6 mb-3">
                 <label>手机</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -65,27 +66,28 @@
                     <input type="text" name="user.phone" class="form-control is-valid"
                            maxlength="11" value=${user.phone}>
                     <div class="valid-feedback">
-                        请输入您的手机号！
+                        请输入您的手机号！<span style="color: red;">${phoneMsg}</span>
                     </div>
-                    <span style="color: red;">${phoneMsg}</span><br/>
                 </div>
             </div>
-            <div class="col-md-4 mb-2">
+            <div class="col-md-6 mb-3">
                 <label>地址</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend3">@</span>
                     </div>
                     <input type="text" name="user.address" class="form-control is-valid"
-                           maxlength="2" value=${user.address}>
+                           maxlength="20" value=${user.address}>
                     <div class="valid-feedback">
                         请输入您的居住地！
                     </div>
                 </div>
             </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Register">
-        <input type="reset" class="btn btn-primary" value="Reset">
+        <div style="margin-left: 150px">
+            <input type="submit" class="btn btn-primary" value="Register">
+            <input type="reset" class="btn btn-primary" value="Reset">
+        </div>
     </form>
 </div>
 <div class="text-black-50">
