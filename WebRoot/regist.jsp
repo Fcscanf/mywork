@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>--%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -9,7 +10,7 @@
 <html>
 <head>
     <base href="<%=basePath%>">
-
+    <sx:head extraLocales="en"/>
     <title>User Register</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -24,7 +25,7 @@
 <body background="img/bg_2.webp">
 <%--添加user，如果姓名没有冲突，那么就添加到数据库，如6果姓名冲突了就不能添加，返回失败页面--%>
 <div style="margin-left: 480px;">
-    <figure class="figure" style="margin-left: 150px">
+    <figure class="figure" style="margin-left: 130px">
         <h1>盐淘商城网</h1>
     </figure>
     <form action="add.action" method="post">
@@ -94,6 +95,14 @@
     根据姓名查询，若不输入，则查询全部
     <form action="query.action" method="post">
         UserName： <input type="text" name="queryText" value="${searchText }"/>
+        <input type="submit" value="查询"/>
+    </form>
+    查询某一时间段内注册的用户
+    <form action="qurt.action" method="post">
+        <%--StartTime: <sx:datetimepicker name="startTime" displayFormat="yyyy-MM-dd HH:mm:ss" language="en"></sx:datetimepicker>--%>
+        <%--EndTime: <sx:datetimepicker name="endTime" displayFormat="yyyy-MM-dd HH:mm:ss" language="en"></sx:datetimepicker>--%>
+            StartTime:<input type="text" name="startTime" value="${startTime}">
+            EndTime:<input type="text" name="endTime" value="${endTime}">
         <input type="submit" value="查询"/>
     </form>
 </div>

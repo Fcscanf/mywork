@@ -1,9 +1,6 @@
 package com.service;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.model.Blackuser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +82,40 @@ public class UserServiceImp implements UserService {
 		return false;
 	}
 	
+	/**
+	 * 查询在某个时间段注册的用户 
+	 *
+	 * @param
+	 * @return 
+	 * @author Fcscanf
+	 * @date 上午 8:57 2019-01-08/0008 
+	 */
+	@Override
+	public List<User> queryUserByRegistTime(String startTime, String endTime) {
+		List<User> allUsers = userDao.findAllUsers();
+		List<User> resultUsers = new ArrayList<>();
+        long startDate = dateToLong(startTime);
+		long endDate = dateToLong(endTime);
+        for (User user : allUsers) {
+            long registDate = dateToLong(user.getRegistDate());
+            if (registDate >= startDate && registDate <= endDate) {
+                resultUsers.add(user);
+            }
+        }
+		return resultUsers;
+	}
+
+    public static long dateToLong(String date) {
+        String year = date.substring(0, 4);
+        String month = date.substring(5, 7);
+        String dairy = date.substring(8, 10);
+        String hour = date.substring(11, 13);
+        String minute = date.substring(14, 16);
+        String second = date.substring(17, 19);
+        long i = Long.parseLong(year + month + dairy + hour + minute + second);
+        return i;
+    }
+
 	/**
 	 * 判断用户是否为黑名单用户，是则将错误信息返回到页面 
 	 *

@@ -31,6 +31,8 @@ public interface UserService {
 
 	public boolean haveUser(String username, String password);
 
+	public List<User> queryUserByRegistTime(String startTime, String endTime);
+
     public boolean isBlackUser(String username);
 
 }

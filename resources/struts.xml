@@ -16,6 +16,8 @@
             <result name="error">login.jsp</result>
 			<result name="success">regist.jsp</result>
 		</action>
-		
+		<action name="qurt" class="userAction" method="queryUserRegistTime">
+			<result name="success">regist.jsp</result>
+		</action>
 	</package>
 </struts>

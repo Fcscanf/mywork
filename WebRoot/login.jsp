@@ -19,7 +19,7 @@
 <div align="center">
     <form action="<%=basePath%>/login"
           method="post"
-          style="background: #20c997"
+          style="background: #20c997;"
           size="50px 15px">
         <table>
             <tr>

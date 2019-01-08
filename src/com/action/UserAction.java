@@ -186,6 +186,16 @@ public class UserAction extends ActionSupport {
         }
     }
 
+    public String queryUserRegistTime() {
+        request = ServletActionContext.getRequest();
+        String startTime = getParam("startTime");
+        String endTime = getParam("endTime");
+        users = userService.queryUserByRegistTime(startTime, endTime);
+        request.setAttribute("startTime",startTime);
+        request.setAttribute("endTime",endTime);
+        return SUCCESS;
+    }
+
     /**
      * 获取用户登录的IP地址
      *

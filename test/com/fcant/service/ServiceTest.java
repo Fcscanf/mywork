@@ -1,8 +1,7 @@
-package service;
+package com.fcant.service;
 
 import com.service.UserService;
 import com.service.UserServiceImp;
-import org.junit.Test;
 
 /**
  * ServiceTest

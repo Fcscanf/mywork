@@ -1,5 +1,7 @@
+package com.fcant.regex;
+
 /**
- * regex
+ * com.fcant.regex.com.fcant.regex
  *
  * @author Fcscanf
  * @description

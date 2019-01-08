@@ -62,7 +62,7 @@
 	</tx:advice>
 	<!-- aop代理设置--> 
 	<aop:config>
-		<aop:pointcut expression="execution(public * com.service..*.*(..))"
+		<aop:pointcut expression="execution(public * com.com.fcant.service..*.*(..))"
 			id="myPointcut" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut" />
 	</aop:config>
