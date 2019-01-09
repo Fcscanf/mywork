@@ -23,5 +23,9 @@
 			<result name="editUser">edituser.jsp</result>
 			<result name="success">success.jsp</result>
 		</action>
+		<action name="delete" class="userAction" method="deleteUser">
+			<result name="success">success.jsp</result>
+			<result name="error">fail.jsp</result>
+		</action>
 	</package>
 </struts>

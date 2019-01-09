@@ -136,7 +136,13 @@ public class UserAction extends ActionSupport {
     }
 
     public String deleteUser() {
-        return SUCCESS;
+        try {
+            Integer param = Integer.parseInt(getParam("id"));
+            userService.deleteUser(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return queryUser() ;
     }
 
     public String getSearchText() {

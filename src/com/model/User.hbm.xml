@@ -9,23 +9,23 @@
             <generator class="assigned"></generator>
         </id>
         <property name="name" type="java.lang.String">
-            <column name="name" length="10" not-null="true" unique="true"/>
+            <column name="name" length="10" not-null="false" unique="true"/>
         </property>
         <property name="password" type="java.lang.String">
-            <column name="password" length="50" not-null="true" />
+            <column name="password" length="50" not-null="false" />
         </property>
 
         <property name="phone" type="java.lang.String">
-            <column name="phone" length="15" not-null="true" />
+            <column name="phone" length="15" not-null="false" />
         </property>
         <property name="age" type="java.lang.Integer">
-            <column name="age" length="3" not-null="true" />
+            <column name="age" length="3" not-null="false" />
         </property>
         <property name="address" type="java.lang.String">
-            <column name="address" length="50" not-null="true" />
+            <column name="address" length="50" not-null="false" />
         </property>
         <property name="registDate" type="java.lang.String">
-            <column name="regist_date" length="20" not-null="true" />
+            <column name="regist_date" length="20" not-null="false" />
         </property>
        
     </class>

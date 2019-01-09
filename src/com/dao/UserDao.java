@@ -30,7 +30,8 @@ public class UserDao {
         hibernateTemplate.update(user);
 	}
 	public void delete(Integer id){
-		
+        User user=getUser(id);
+        hibernateTemplate.delete(user);
 	}
 	public User getUser(Integer id){
 		return (User)this.hibernateTemplate.load(User.class,id);
