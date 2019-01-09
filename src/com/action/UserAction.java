@@ -120,6 +120,18 @@ public class UserAction extends ActionSupport {
     }
 
     public String editUser() {
+        try {
+            Integer param = Integer.parseInt(getParam("param"));
+            if(param == 0){
+                Integer id = Integer.parseInt(getParam("id"));
+                user = userService.getUser( id);
+                return "editUser";
+            }else if(param == 1){
+                userService.modifyUser(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
@@ -157,12 +169,16 @@ public class UserAction extends ActionSupport {
         long loginTime = UserServiceImp.dateToLong(currentime);
 
         /**
-         * 先判断是否是黑名单用户
+         * 先判断登录用户是否被锁定
          */
         if (userService.checkLoginLockUser(userName, loginTime)) {
             request.setAttribute("msg", "该用户已被锁定，帐号还在锁定中，不能登录！");
             return ERROR;
-        } else if (userService.isBlackUser(userName)) {
+        } else
+            /**
+             * 先判断是否是黑名单用户
+             */
+            if (userService.isBlackUser(userName)) {
             request.setAttribute("msg", "该用户是黑名单用户，不能登录！");
             return ERROR;
         } else {

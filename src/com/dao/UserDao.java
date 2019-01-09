@@ -27,7 +27,7 @@ public class UserDao {
 		hibernateTemplate.save(user);
 	}
 	public void update(User user){
-		
+        hibernateTemplate.update(user);
 	}
 	public void delete(Integer id){
 		

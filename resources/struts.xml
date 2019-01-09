@@ -19,5 +19,9 @@
 		<action name="qurt" class="userAction" method="queryUserRegistTime">
 			<result name="success">regist.jsp</result>
 		</action>
+		<action name="edit" class="userAction" method="editUser">
+			<result name="editUser">edituser.jsp</result>
+			<result name="success">success.jsp</result>
+		</action>
 	</package>
 </struts>

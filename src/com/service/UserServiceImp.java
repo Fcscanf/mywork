@@ -68,7 +68,7 @@ public class UserServiceImp implements UserService {
 	@Override
 	@Transactional
 	public void modifyUser(User user){
-		
+        userDao.update(user);
 	}
 	
 	@Override
@@ -178,10 +178,9 @@ public class UserServiceImp implements UserService {
         SystemConfig systemConfig = SystemConfig.getInstance();
         systemConfig.init();
         long lockUserTime = Long.parseLong(SystemConfig.get("lockUserTime"));
-        Iterator<Map.Entry<String, Long>> iterator = LOCK_USER_MAP.entrySet().iterator();
         if (LOCK_USER_MAP.size()==0) {
             return false;
-        } else if (LOCK_USER_MAP.get(username).equals(null)) {
+        } else if (!LOCK_USER_MAP.containsKey(username)) {
             return false;
         } else if (loginTime>LOCK_USER_MAP.get(username)+lockUserTime){
             LOCK_USER_MAP.remove(username);
