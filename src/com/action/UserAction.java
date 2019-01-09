@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.model.Log;
 import com.service.LogService;
+import com.service.UserServiceImp;
 import com.util.AESUtilFinal;
 import com.util.SystemConfig;
 import org.apache.struts2.ServletActionContext;
@@ -153,11 +154,15 @@ public class UserAction extends ActionSupport {
         String userName = user.getName();
         String password = user.getPassword();
         System.out.println(password);
+        long loginTime = UserServiceImp.dateToLong(currentime);
 
         /**
          * 先判断是否是黑名单用户
          */
-        if (userService.isBlackUser(userName)) {
+        if (userService.checkLoginLockUser(userName, loginTime)) {
+            request.setAttribute("msg", "该用户已被锁定，帐号还在锁定中，不能登录！");
+            return ERROR;
+        } else if (userService.isBlackUser(userName)) {
             request.setAttribute("msg", "该用户是黑名单用户，不能登录！");
             return ERROR;
         } else {
@@ -178,8 +183,12 @@ public class UserAction extends ActionSupport {
                 log.setLog("用户登录");
                 logService.logWrite(log);
                 return SUCCESS;
+            } else if (userService.lockUser(userName, loginTime)) {
+                request.setAttribute("user", user);
+                request.setAttribute("msg", "密码输错五次，帐号将被锁定五分钟，五分钟内不能登录！");
+                return ERROR;
             } else {
-                request.setAttribute("user",user);
+                request.setAttribute("user", user);
                 request.setAttribute("msg", "用户名或密码错误！");
                 return ERROR;
             }

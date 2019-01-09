@@ -3,6 +3,7 @@ package com.service;
 import java.util.*;
 
 import com.model.Blackuser;
+import com.util.SystemConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,22 @@ public class UserServiceImp implements UserService {
 	private static Map<String, User> USER_MAP = new HashMap<>();
 
 	private static HashSet<String> BLACKLIST_SET = null;
-	
+
+	/**
+	 * 缓存锁定的用户，key为用户名，value为锁定时间
+	 */
+    private static Map<String, Long> LOCK_USER_MAP = new HashMap<>();
+
+    /**
+     * 缓存记录登录的用户
+     */
+    private static HashSet<String> LOGINUSER_SET = new HashSet<>();
+
+    /**
+     * 定义计数器
+     */
+    int i = 0;
+
 	@Override
 	public boolean exits(String username){
 		List<User> userList = userDao.findByUsername(username);
@@ -147,4 +163,62 @@ public class UserServiceImp implements UserService {
 //		}
 		return false;
 	}
+
+    /**
+     * 检查登录的是否为锁定的用户，如果是通过当前登录时间判断超过锁定时间将为该用户解锁
+     *
+     * @param username
+     * @param loginTime
+     * @return
+     * @author Fcscanf
+     * @date 上午 8:16 2019-01-09/0009
+     */
+    @Override
+    public boolean checkLoginLockUser(String username, long loginTime) {
+        SystemConfig systemConfig = SystemConfig.getInstance();
+        systemConfig.init();
+        long lockUserTime = Long.parseLong(SystemConfig.get("lockUserTime"));
+        Iterator<Map.Entry<String, Long>> iterator = LOCK_USER_MAP.entrySet().iterator();
+        if (LOCK_USER_MAP.size()==0) {
+            return false;
+        } else if (LOCK_USER_MAP.get(username).equals(null)) {
+            return false;
+        } else if (loginTime>LOCK_USER_MAP.get(username)+lockUserTime){
+            LOCK_USER_MAP.remove(username);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 记录用户登录次数，如果大于五次就锁定用户
+     *
+     * @param username
+     * @param loginTime
+     * @return
+     * @author Fcscanf
+     * @date 上午 8:58 2019-01-09/0009
+     */
+    @Override
+    public boolean lockUser(String username, long loginTime) {
+        LOGINUSER_SET.add(username);
+        if (LOGINUSER_SET.size() > 0) {
+            Iterator<String> iterator = LOGINUSER_SET.iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next().equals(username)) {
+                    SystemConfig systemConfig = SystemConfig.getInstance();
+                    systemConfig.init();
+                    int loginErrorTimes = Integer.parseInt(SystemConfig.get("loginErrorTimes"));
+                    i++;
+                    if (i % loginErrorTimes == 0) {
+                        LOCK_USER_MAP.put(username, loginTime);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

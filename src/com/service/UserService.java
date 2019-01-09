@@ -35,4 +35,24 @@ public interface UserService {
 
     public boolean isBlackUser(String username);
 
+    /**
+     * 检查登录的是否为锁定的用户，如果是通过当前登录时间判断超过锁定时间将为该用户解锁
+     *
+     * @param username
+     * @param loginTime
+     * @return
+     * @author Fcscanf
+     * @date 上午 8:16 2019-01-09/0009
+     */
+	public boolean checkLoginLockUser(String username, long loginTime);
+
+	/**
+	 * 记录用户登录次数，如果大于五次就锁定用户
+	 *
+	 * @param
+	 * @return
+	 * @author Fcscanf
+	 * @date 上午 8:58 2019-01-09/0009
+	 */
+	public boolean lockUser(String username, long loginTime);
 }
