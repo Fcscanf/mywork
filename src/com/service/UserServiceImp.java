@@ -220,4 +220,15 @@ public class UserServiceImp implements UserService {
         }
         return false;
     }
+
+    @Override
+    public boolean checkPhone(String phone) {
+        List<User> userList = userDao.findAllUsers();
+        for (User user : userList) {
+            if (user.getPhone().equals(phone)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

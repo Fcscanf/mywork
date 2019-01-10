@@ -55,4 +55,6 @@ public interface UserService {
 	 * @date 上午 8:58 2019-01-09/0009
 	 */
 	public boolean lockUser(String username, long loginTime);
+
+    public boolean checkPhone(String phone);
 }

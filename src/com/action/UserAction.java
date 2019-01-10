@@ -64,10 +64,8 @@ public class UserAction extends ActionSupport {
     }
 
     public String addUser() {
-
         request = ServletActionContext.getRequest();
         String password = user.getPassword();
-
         /**
          * 年龄判断
          */
@@ -85,11 +83,15 @@ public class UserAction extends ActionSupport {
             request.setAttribute("passMsg", "密码不是英文和数字的组合且密码长度至少6不能多于20位！");
             return ERROR;
         } else if (isPhone(user.getPhone())) {
-            request.setAttribute("user",user);
+            request.setAttribute("user", user);
             request.setAttribute("phoneMsg", "手机号格式不正确！");
             return ERROR;
+        } else if (userService.checkPhone(user.getPhone())) {
+            request.setAttribute("user", user);
+            request.setAttribute("phoneMsg", "当前手机号已被注册！");
+            return ERROR;
         } else if (!(user.getAge() > minage && user.getAge() < maxage)) {
-            request.setAttribute("user",user);
+            request.setAttribute("user", user);
             request.setAttribute("ageMsg", "用户年龄大小不符合要求！");
             return ERROR;
         }
@@ -263,7 +265,7 @@ public class UserAction extends ActionSupport {
     public boolean isPhone(String phone) {
         SystemConfig systemConfig = SystemConfig.getInstance();
         systemConfig.init();
-        String phoneLength = SystemConfig.get("phonelength");
+        String phoneLength = SystemConfig.get("phoneLength");
         String phoneFirst = phone.substring(0, 1);
         String telLength = String.valueOf(phone.length());
         if (telLength.equals(phoneLength) && phoneFirst.equals(String.valueOf(1))) {
