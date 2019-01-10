@@ -3,7 +3,9 @@ package com.service;
 import java.util.*;
 
 import com.model.Blackuser;
+import com.util.RandomCode;
 import com.util.SystemConfig;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +36,8 @@ public class UserServiceImp implements UserService {
      * 定义计数器
      */
     int i = 0;
+
+    private HashSet<String> SMS_CODE = new HashSet<>();
 
 	@Override
 	public boolean exits(String username){
@@ -230,5 +234,19 @@ public class UserServiceImp implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public String setRandomCode() {
+        String code = RandomCode.getNonce_str();
+        SMS_CODE.add(code);
+        return code;
+    }
+
+    @Override
+    public String getRandomCode() {
+        String code = SMS_CODE.iterator().next();
+        SMS_CODE.remove(code);
+        return code;
     }
 }

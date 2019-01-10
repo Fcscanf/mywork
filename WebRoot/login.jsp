@@ -17,10 +17,11 @@
 </head>
 <body background="<%=basePath%>/img/bg_2.webp" size="100% 80px">
 <div align="center">
-    <form action="<%=basePath%>/login"
-          method="post"
-          style="background: #20c997;"
-          size="50px 15px">
+    <span>
+        <form action="<%=basePath%>/login"
+              method="post"
+              style="background: #20c997;"
+              size="50px 15px">
         <table>
             <tr>
                 <td>
@@ -48,6 +49,40 @@
             </tr>
         </table>
     </form>
+        <form action="<%=basePath%>/loginByPhone"
+              method="post"
+              style="background: #20c997;"
+              size="50px 15px">
+        <table>
+            <tr>
+                <td>
+                    手机号
+                </td>
+                <td>
+                    <input type="text" name="user.phone" value=${user.phone}>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    验证码
+                </td>
+                <td>
+                    <input type="text" name="inputRandomCode"><a href="<%=basePath%>/getRandomCode" methods="post">点击获取验证码</a>
+                </td>
+            </tr>
+            <div style="color: red;">您的验证码是：${randomCode}</div>
+            <tr>
+                <td>
+                    <input type="submit" value="登录">
+                </td>
+                <td>
+                    <input type="reset" value="重置">
+                </td>
+            </tr>
+        </table>
+    </form>
+    </span>
+
     <div style="color: red;">${msg}</div>
 </div>
 </body>

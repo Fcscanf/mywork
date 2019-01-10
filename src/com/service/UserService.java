@@ -2,6 +2,7 @@ package com.service;
 import java.util.List;
 
 import com.model.User;
+import com.util.RandomCode;
 
 public interface UserService {
 	/**
@@ -57,4 +58,8 @@ public interface UserService {
 	public boolean lockUser(String username, long loginTime);
 
     public boolean checkPhone(String phone);
+
+    public String setRandomCode();
+
+    public String getRandomCode();
 }

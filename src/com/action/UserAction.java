@@ -1,8 +1,7 @@
 package com.action;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +10,7 @@ import com.model.Log;
 import com.service.LogService;
 import com.service.UserServiceImp;
 import com.util.AESUtilFinal;
+import com.util.RandomCode;
 import com.util.SystemConfig;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,11 +75,11 @@ public class UserAction extends ActionSupport {
         int maxage = SystemConfig.getInteger("maxage");
 
         if (userService.exits(user.getName())) {
-            request.setAttribute("user",user);
+            request.setAttribute("user", user);
             request.setAttribute("nameMsg", "该用户名已存在！");
             return ERROR;
         } else if (!isEngDig(user.getPassword())) {
-            request.setAttribute("user",user);
+            request.setAttribute("user", user);
             request.setAttribute("passMsg", "密码不是英文和数字的组合且密码长度至少6不能多于20位！");
             return ERROR;
         } else if (isPhone(user.getPhone())) {
@@ -124,11 +124,11 @@ public class UserAction extends ActionSupport {
     public String editUser() {
         try {
             Integer param = Integer.parseInt(getParam("param"));
-            if(param == 0){
+            if (param == 0) {
                 Integer id = Integer.parseInt(getParam("id"));
-                user = userService.getUser( id);
+                user = userService.getUser(id);
                 return "editUser";
-            }else if(param == 1){
+            } else if (param == 1) {
                 userService.modifyUser(user);
             }
         } catch (Exception e) {
@@ -144,7 +144,7 @@ public class UserAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return queryUser() ;
+        return queryUser();
     }
 
     public String getSearchText() {
@@ -183,40 +183,59 @@ public class UserAction extends ActionSupport {
             request.setAttribute("msg", "该用户已被锁定，帐号还在锁定中，不能登录！");
             return ERROR;
         } else
-            /**
-             * 先判断是否是黑名单用户
-             */
+        /**
+         * 先判断是否是黑名单用户
+         */
             if (userService.isBlackUser(userName)) {
-            request.setAttribute("msg", "该用户是黑名单用户，不能登录！");
-            return ERROR;
-        } else {
-            /**
-             * 再进行用户密码校验
-             */
-            SystemConfig systemConfig = SystemConfig.getInstance();
-            systemConfig.init();
-            String secretKey = SystemConfig.get("secretKey");
-            String encrypt = AESUtilFinal.encrypt(secretKey, password);
-            System.out.println(encrypt);
-
-            if (userService.haveUser(userName, encrypt)) {
-                log = new Log();
-                log.setUserName(userName);
-                log.setLoginTime(currentime);
-                log.setLogIp(getIpAddr(request));
-                log.setLog("用户登录");
-                logService.logWrite(log);
-                return SUCCESS;
-            } else if (userService.lockUser(userName, loginTime)) {
-                request.setAttribute("user", user);
-                request.setAttribute("msg", "密码输错五次，帐号将被锁定五分钟，五分钟内不能登录！");
+                request.setAttribute("msg", "该用户是黑名单用户，不能登录！");
                 return ERROR;
             } else {
-                request.setAttribute("user", user);
-                request.setAttribute("msg", "用户名或密码错误！");
-                return ERROR;
+                /**
+                 * 再进行用户密码校验
+                 */
+                SystemConfig systemConfig = SystemConfig.getInstance();
+                systemConfig.init();
+                String secretKey = SystemConfig.get("secretKey");
+                String encrypt = AESUtilFinal.encrypt(secretKey, password);
+                System.out.println(encrypt);
+
+                if (userService.haveUser(userName, encrypt)) {
+                    log = new Log();
+                    log.setUserName(userName);
+                    log.setLoginTime(currentime);
+                    log.setLogIp(getIpAddr(request));
+                    log.setLog("用户登录");
+                    logService.logWrite(log);
+                    return SUCCESS;
+                } else if (userService.lockUser(userName, loginTime)) {
+                    request.setAttribute("user", user);
+                    request.setAttribute("msg", "密码输错五次，帐号将被锁定五分钟，五分钟内不能登录！");
+                    return ERROR;
+                } else {
+                    request.setAttribute("user", user);
+                    request.setAttribute("msg", "用户名或密码错误！");
+                    return ERROR;
+                }
+            }
+    }
+
+    public String loginByPhone() {
+        request = ServletActionContext.getRequest();
+        if (userService.checkPhone(user.getPhone())) {
+            String inputCode = request.getParameter("inputRandomCode");
+            String code = userService.getRandomCode();
+            if (inputCode.equals(code)) {
+                return SUCCESS;
             }
         }
+        return ERROR;
+    }
+
+    public String getRandomCode() {
+        request = ServletActionContext.getRequest();
+        String smsCode = userService.setRandomCode();
+        request.setAttribute("randomCode", smsCode);
+        return SUCCESS;
     }
 
     public String queryUserRegistTime() {
@@ -224,8 +243,8 @@ public class UserAction extends ActionSupport {
         String startTime = getParam("startTime");
         String endTime = getParam("endTime");
         users = userService.queryUserByRegistTime(startTime, endTime);
-        request.setAttribute("startTime",startTime);
-        request.setAttribute("endTime",endTime);
+        request.setAttribute("startTime", startTime);
+        request.setAttribute("endTime", endTime);
         return SUCCESS;
     }
 
