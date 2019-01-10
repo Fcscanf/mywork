@@ -227,7 +227,7 @@ public class UserAction extends ActionSupport {
             return ERROR;
         }else if (userService.checkPhone(user.getPhone())) {
             String inputCode = request.getParameter("inputRandomCode");
-            String code = userService.getRandomCode();
+            String code = userService.getRandomCode(user.getPhone());
             if ("1".equals(code)) {
                 request.setAttribute("user",user);
                 request.setAttribute("msg", "您还未获取手机验证码！");
@@ -246,9 +246,20 @@ public class UserAction extends ActionSupport {
 
     public String getRandomCode() {
         request = ServletActionContext.getRequest();
-        String smsCode = userService.setRandomCode();
-        request.setAttribute("randomCode", smsCode);
-        return SUCCESS;
+        String phone = user.getPhone();
+        if (isPhone(phone)) {
+            request.setAttribute("user", user);
+            request.setAttribute("msg", "手机号格式不正确！");
+            return ERROR;
+        } else if (userService.checkPhone(user.getPhone())) {
+            String smsCode = userService.setRandomCode(user.getPhone());
+            request.setAttribute("randomCode", smsCode);
+            return SUCCESS;
+        } else {
+            request.setAttribute("user", user);
+            request.setAttribute("msg", "手机号对应的帐号不存在！");
+            return ERROR;
+        }
     }
 
     public String queryUserRegistTime() {

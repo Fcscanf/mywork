@@ -33,6 +33,7 @@
 		</action>
 		<action name="getRandomCode" class="userAction" method="getRandomCode">
 			<result name="success">phonelogin.jsp</result>
+			<result name="error">phonelogincode.jsp</result>
 		</action>
 	</package>
 </struts>

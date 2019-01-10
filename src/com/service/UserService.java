@@ -59,7 +59,7 @@ public interface UserService {
 
     public boolean checkPhone(String phone);
 
-    public String setRandomCode();
+    public String setRandomCode(String phone);
 
-    public String getRandomCode();
+    public String getRandomCode(String phone);
 }

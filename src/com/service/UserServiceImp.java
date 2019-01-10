@@ -37,7 +37,7 @@ public class UserServiceImp implements UserService {
      */
     int i = 0;
 
-    private HashSet<String> SMS_CODE = new HashSet<>();
+    private HashMap<String, String> SMS_CODE = new HashMap<>();
 
 	@Override
 	public boolean exits(String username){
@@ -237,26 +237,26 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public String setRandomCode() {
+    public String setRandomCode(String phone) {
         String code = RandomCode.getNonce_str();
-        SMS_CODE.add(code);
+        SMS_CODE.put(phone, code);
         return code;
     }
 
     /**
      * 获取缓存的验证码
-     * TODO：如果有人多次获取了验证码的移除问题；可解决方案：通过缓存手机号和验证码
      *
+     * @param phone
      * @author Fcscanf
      * @date 上午 11:05 2019-01-10/0010
      */
     @Override
-    public String getRandomCode() {
+    public String getRandomCode(String phone) {
         if (SMS_CODE.size() == 0) {
             return "1";
         } else {
-            String code = SMS_CODE.iterator().next();
-            SMS_CODE.remove(code);
+            String code = SMS_CODE.get(phone);
+            SMS_CODE.remove(phone);
             return code;
         }
     }

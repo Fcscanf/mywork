@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
     <welcome-file-list>
-        <welcome-file>/phonelogin.jsp</welcome-file>
+        <welcome-file>/phonelogincode.jsp</welcome-file>
     </welcome-file-list>
     <context-param>
         <param-name>contextConfigLocation</param-name>

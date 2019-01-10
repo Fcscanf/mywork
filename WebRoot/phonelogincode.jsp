@@ -17,7 +17,7 @@
 </head>
 <body background="<%=basePath%>/img/bg_2.webp" size="100% 80px">
 <div align="center">
-    <form action="<%=basePath%>loginByPhone"
+    <form action="<%=basePath%>getRandomCode"
           method="post"
           style="background: #20c997;"
           size="50px 15px">
@@ -32,22 +32,10 @@
             </tr>
             <tr>
                 <td>
-                    验证码
-                </td>
-                <td>
-                    <input type="text" name="inputRandomCode">
-                </td>
-            </tr>
-            <div style="color: yellow;">您的手机验证码是：${randomCode}</div>
-            <tr>
-                <td>
-                    <input type="submit" value="登录">
+                    <input type="submit" value="获取验证码">
                 </td>
                 <td>
                     <input type="reset" value="重置">
-                </td>
-                <td>
-                    <a href="phonelogincode.jsp">获取验证码</a>
                 </td>
             </tr>
         </table>
