@@ -243,10 +243,21 @@ public class UserServiceImp implements UserService {
         return code;
     }
 
+    /**
+     * 获取缓存的验证码
+     * TODO：如果有人多次获取了验证码的移除问题；可解决方案：通过缓存手机号和验证码
+     *
+     * @author Fcscanf
+     * @date 上午 11:05 2019-01-10/0010
+     */
     @Override
     public String getRandomCode() {
-        String code = SMS_CODE.iterator().next();
-        SMS_CODE.remove(code);
-        return code;
+        if (SMS_CODE.size() == 0) {
+            return "1";
+        } else {
+            String code = SMS_CODE.iterator().next();
+            SMS_CODE.remove(code);
+            return code;
+        }
     }
 }

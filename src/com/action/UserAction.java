@@ -221,13 +221,26 @@ public class UserAction extends ActionSupport {
 
     public String loginByPhone() {
         request = ServletActionContext.getRequest();
-        if (userService.checkPhone(user.getPhone())) {
+        if (isPhone(user.getPhone())) {
+            request.setAttribute("user", user);
+            request.setAttribute("msg", "手机号格式不正确！");
+            return ERROR;
+        }else if (userService.checkPhone(user.getPhone())) {
             String inputCode = request.getParameter("inputRandomCode");
             String code = userService.getRandomCode();
-            if (inputCode.equals(code)) {
+            if ("1".equals(code)) {
+                request.setAttribute("user",user);
+                request.setAttribute("msg", "您还未获取手机验证码！");
+                return ERROR;
+            } else if (inputCode.equals(code)) {
                 return SUCCESS;
+            } else {
+                request.setAttribute("user",user);
+                request.setAttribute("msg", "您输入的验证码不正确！");
+                return ERROR;
             }
         }
+        request.setAttribute("msg", "当前手机号对应的用户不存在！");
         return ERROR;
     }
 

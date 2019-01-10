@@ -29,10 +29,10 @@
 		</action>
 		<action name="loginByPhone" class="userAction" method="loginByPhone">
 			<result name="success">regist.jsp</result>
-			<result name="error">login.jsp</result>
+			<result name="error">phonelogin.jsp</result>
 		</action>
 		<action name="getRandomCode" class="userAction" method="getRandomCode">
-			<result name="success">login.jsp</result>
+			<result name="success">phonelogin.jsp</result>
 		</action>
 	</package>
 </struts>

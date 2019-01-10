@@ -1,43 +1,45 @@
 <%--
   Created by IntelliJ IDEA.
   User: fcsca
-  Date: 2019-01-03/0003
-  Time: 下午 23:19
+  Date: 2019-01-10/0010
+  Time: 下午 12:34
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <html>
 <head>
     <base href="<%=basePath%>">
-    <title>Login</title>
+    <title>手机登录</title>
 </head>
 <body background="<%=basePath%>/img/bg_2.webp" size="100% 80px">
 <div align="center">
-        <form action="<%=basePath%>/login"
-              method="post"
-              style="background: #20c997;"
-              size="50px 15px">
+    <form action="<%=basePath%>loginByPhone"
+          method="post"
+          style="background: #20c997;"
+          size="50px 15px">
         <table>
             <tr>
                 <td>
-                    用户名
+                    手机号
                 </td>
                 <td>
-                    <input type="text" name="user.name" value=${user.name}>
+                    <input type="text" name="user.phone" value=${user.phone}>
                 </td>
             </tr>
             <tr>
                 <td>
-                    密&nbsp码
+                    验证码
                 </td>
                 <td>
-                    <input type="password" name="user.password">
+                    <input type="text" name="inputRandomCode">
+                    <a href="<%=basePath%>/getRandomCode" methods="post">点击获取验证码</a>
                 </td>
             </tr>
+            <div style="color: yellow;">在登录之前请先获取手机验证码：${randomCode}</div>
             <tr>
                 <td>
                     <input type="submit" value="登录">
