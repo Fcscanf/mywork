@@ -47,6 +47,7 @@
                     <input type="reset" value="重置">
                 </td>
                 <td>
+                    <a href="login.jsp">密码登录</a>
                     <a href="phonelogincode.jsp">获取验证码</a>
                 </td>
             </tr>

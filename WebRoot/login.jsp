@@ -45,6 +45,9 @@
                 <td>
                     <input type="reset" value="重置">
                 </td>
+                <td>
+                    <a href="phonelogincode.jsp">手机号登录</a>
+                </td>
             </tr>
         </table>
     </form>

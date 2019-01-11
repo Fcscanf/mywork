@@ -35,8 +35,6 @@ public class UserAction extends ActionSupport {
 
     private User user;
 
-    private Log log;
-
     private String searchText;
 
     private List<User> users;
@@ -82,17 +80,17 @@ public class UserAction extends ActionSupport {
             request.setAttribute("user", user);
             request.setAttribute("passMsg", "密码不是英文和数字的组合且密码长度至少6不能多于20位！");
             return ERROR;
-        } else if (isPhone(user.getPhone())) {
+        } else if (!(user.getAge() > minage && user.getAge() < maxage)) {
+            request.setAttribute("user", user);
+            request.setAttribute("ageMsg", "用户年龄大小不符合要求！");
+            return ERROR;
+        }else if (isPhone(user.getPhone())) {
             request.setAttribute("user", user);
             request.setAttribute("phoneMsg", "手机号格式不正确！");
             return ERROR;
         } else if (userService.checkPhone(user.getPhone())) {
             request.setAttribute("user", user);
             request.setAttribute("phoneMsg", "当前手机号已被注册！");
-            return ERROR;
-        } else if (!(user.getAge() > minage && user.getAge() < maxage)) {
-            request.setAttribute("user", user);
-            request.setAttribute("ageMsg", "用户年龄大小不符合要求！");
             return ERROR;
         }
 
@@ -106,7 +104,7 @@ public class UserAction extends ActionSupport {
         user.setRegistDate(currentime);
 
         userService.save(user);
-        log = new Log();
+        Log log = new Log();
         log.setUserName(user.getName());
         log.setLoginTime(currentime);
         log.setLogIp(getIpAddr(request));
@@ -200,7 +198,7 @@ public class UserAction extends ActionSupport {
                 System.out.println(encrypt);
 
                 if (userService.haveUser(userName, encrypt)) {
-                    log = new Log();
+                    Log log = new Log();
                     log.setUserName(userName);
                     log.setLoginTime(currentime);
                     log.setLogIp(getIpAddr(request));
@@ -233,7 +231,7 @@ public class UserAction extends ActionSupport {
                 request.setAttribute("msg", "您还未获取手机验证码！");
                 return ERROR;
             } else if (inputCode.equals(code)) {
-                return SUCCESS;
+                    return SUCCESS;
             } else {
                 request.setAttribute("user",user);
                 request.setAttribute("msg", "您输入的验证码不正确！");
@@ -262,6 +260,12 @@ public class UserAction extends ActionSupport {
         }
     }
 
+    /**
+     * 查询某一时间段内注册的用户 
+     *
+     * @author Fcscanf
+     * @date 上午 10:50 2019-01-11/0011
+     */
     public String queryUserRegistTime() {
         request = ServletActionContext.getRequest();
         String startTime = getParam("startTime");

@@ -25,6 +25,9 @@
 <body background="img/bg_2.webp">
 <%--添加user，如果姓名没有冲突，那么就添加到数据库，如6果姓名冲突了就不能添加，返回失败页面--%>
 <div style="margin-left: 480px;">
+    <div style="margin-right: 10px">
+        <a href="phonelogincode.jsp">退出</a>
+    </div>
     <figure class="figure" style="margin-left: 130px">
         <h1>盐淘商城网</h1>
     </figure>
